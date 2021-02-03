@@ -1,0 +1,1 @@
+https://pntbiz1.gitbook.io/pnt-vestigo-ad-sdk/ios/api-spec

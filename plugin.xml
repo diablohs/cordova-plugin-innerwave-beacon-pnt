@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-innerwave-beacon-pnt" version="1.0.0"
+	xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>BeaconPlugin</name>
+	<js-module name="BeaconPlugin" src="www/BeaconPlugin.js">
+		<clobbers target="BeaconPlugin" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="BeaconPlugin">
+				<param name="android-package" value="com.innerwave.beacon.pnt.BeaconPlugin" />
+			</feature>
+		</config-file>
+
+		<config-file parent="application" target="AndroidManifest.xml">
+			<service android:name="com.pnt.sdk.vestigo.service.PnTVestigoLifeService"
+				android:enabled="true">
+			</service>
+			<service
+				android:name="com.pnt.sdk.vestigo.service.PnTVestigoService"
+				android:enabled="true"
+				android:foregroundServiceType="connectedDevice|dataSync">
+			</service>
+        </config-file>
+
+		 <!-- Android Manifest Config -->
+        <config-file parent="/*" target="AndroidManifest.xml">           
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.BLUETOOTH"/>
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+            <!-- targetSDKVersion: 28 이상일 때 추가 필수 -->
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <!-- targetSDKVersion: 29 이상일 때 추가 필수 -->
+            <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+			 <!-- <application>
+				<receiver android:name="com.pnt.sdk.vestigo.classes.geofence.GeoFenceBroadcastReceiver" />
+			</application> -->
+        </config-file>
+
+        <framework src="src/android/beacon.gradle" custom="true" type="gradleReference" />
+
+		<resource-file src="libs/VestigoAd_Android_core-release.aar" target="libs/VestigoAd_Android_core-release.aar" />
+
+		<source-file src="src/android/BeaconPlugin.java" target-dir="src/com/innerwave/beacon/pnt/BeaconPlugin" />
+	</platform>
+
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="BeaconPlugin">
+				<param name="ios-package" value="BeaconPlugin" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/BeaconPlugin.m" />
+	</platform>
+</plugin>

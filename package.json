@@ -1,0 +1,19 @@
+{
+  "name": "cordova-plugin-innerwave-beacon-pnt",
+  "version": "1.0.0",
+  "description": "cordova innerwave beacon pnt plugin",
+  "cordova": {
+    "id": "cordova-plugin-innerwave-beacon-pnt",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "kimhs",
+  "license": "MIT"
+}
