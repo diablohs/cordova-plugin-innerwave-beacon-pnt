@@ -8,9 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.provider.Settings;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -20,6 +23,7 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.text.Editable.Factory;
 import android.view.View;
@@ -95,47 +99,53 @@ public class BeaconPlugin extends CordovaPlugin {
         BeaconPlugin self = this;
 
         if (VERSION.SDK_INT >= 23 && VERSION.SDK_INT < 29) {
-           if (ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_FINE_LOCATION") == 0) {
+           if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
               startFlag = true;
               this.ignoreBatteryOptimizations();
            } else {
-              cordova.requestPermissions(this, this.REQUEST_PERMISSION_LOCATION, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"});
+              cordova.requestPermissions(this, this.REQUEST_PERMISSION_LOCATION, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
            }
         } else if (VERSION.SDK_INT >= 29 && VERSION.SDK_INT < 30) {
-           if (ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_FINE_LOCATION") == 0 && ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_COARSE_LOCATION") == 0 && ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_BACKGROUND_LOCATION") == 0) {
+           if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED 
+           && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             startFlag = true;  
             this.ignoreBatteryOptimizations();
            } else {
-              cordova.requestPermissions(this, this.REQUEST_PERMISSION_LOCATION, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_BACKGROUND_LOCATION"});
+              cordova.requestPermissions(this, this.REQUEST_PERMISSION_LOCATION, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION});
            }
         } else if (VERSION.SDK_INT >= 30) {
-           if (ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_FINE_LOCATION") == 0 && ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_COARSE_LOCATION") == 0 && ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_BACKGROUND_LOCATION") == 0) {
+           if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             startFlag = true;  
             this.ignoreBatteryOptimizations();
-           } else if (ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_FINE_LOCATION") == 0 && ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_COARSE_LOCATION") == 0) {
-              if (ContextCompat.checkSelfPermission(context, "android.permission.ACCESS_BACKGROUND_LOCATION") != 0) {
-                 String alertMsg = "서비스를 이용하기 위해서는 위치권한 '항상허용' 이 필요합니다. 앱 상세설정으로 이동합니다. (권한 - 위치 - 항상 허용 선택)";
-                 if(locationFlag){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this.cordova.getActivity());
-
-                    AlertDialog dialog = builder.setTitle("알림").setMessage(alertMsg).setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener(){
-                        // 확인 버튼 클릭시 설정
-                        public void onClick(DialogInterface dialog, int whichButton){
-                            Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
-                            intent.setData(Uri.parse("package:" + cordova.getActivity().getPackageName()));
-                            cordova.startActivityForResult(self, intent, REQUEST_APP_SETTINGS);
-                        }
-                    }).setNegativeButton("취소", new DialogInterface.OnClickListener(){
-                        // 확인 버튼 클릭시 설정
-                        public void onClick(DialogInterface dialog, int whichButton){
-                            locationFlag = false;
-                            dialog.dismiss();
-                        }
-                    }).show();
-                }
-              }
            } else {
-              cordova.requestPermissions(this, this.REQUEST_PERMISSION_LOCATION, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"});
+                if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(context,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                    cordova.requestPermissions(this, REQUEST_PERMISSION_LOCATION, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
+                }else{
+                    if (ContextCompat.checkSelfPermission(context,Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        // granted all
+                    } else {
+                        String alertMsg = "서비스를 이용하기 위해서는 위치권한 '항상허용' 이 필요합니다. 앱 상세설정으로 이동합니다. (권한 - 위치 - 항상 허용 선택)";
+                        if(locationFlag){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(this.cordova.getActivity());
+
+                            AlertDialog dialog = builder.setTitle("알림").setMessage(alertMsg).setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                                // 확인 버튼 클릭시 설정
+                                public void onClick(DialogInterface dialog, int whichButton){
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    intent.setData(Uri.parse("package:" + cordova.getActivity().getPackageName()));
+                                    cordova.startActivityForResult(self, intent, REQUEST_APP_SETTINGS);
+                                }
+                            }).setNegativeButton("취소", new DialogInterface.OnClickListener(){
+                                // 확인 버튼 클릭시 설정
+                                public void onClick(DialogInterface dialog, int whichButton){
+                                    locationFlag = false;
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                        }
+                    }
+                }
            }
         }  
     }
@@ -173,14 +183,15 @@ public class BeaconPlugin extends CordovaPlugin {
         }
     }
 
-    public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions, @NotNull int[] grantResults) {
-        // super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    @Override
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
+        // super.onRequestPermissionResult(requestCode, permissions, grantResults);
+        Log.e("BEACONPlugin", "requestCode : " + requestCode);
         Context context=cordova.getActivity().getApplicationContext();
-
         if (requestCode == this.REQUEST_PERMISSION_LOCATION) {
            if (grantResults[0] != 0) {
-              String toastMsg = "Service couldn\'t run without permission of location service!";
-              Toast.makeText(context, toastMsg, 0).show();
+            //   String toastMsg = "Service couldn\'t run without permission of location service!";
+            //   Toast.makeText(context, toastMsg, 0).show();
               this.checkPermissions();
            } else {
               this.checkPermissions();
