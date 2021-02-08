@@ -56,6 +56,9 @@
 				<param name="ios-package" value="BeaconPlugin" />
 			</feature>
 		</config-file>
+
+		<framework src="src/ios/VestigoAD_IOS_core.framework" custom="true" />
+
 		<header-file src="src/ios/Bridging-Header.h"/>
         <source-file src="src/ios/BeaconPlugin.swift"/>
 	</platform>
