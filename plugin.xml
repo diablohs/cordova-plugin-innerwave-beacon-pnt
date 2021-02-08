@@ -56,7 +56,12 @@
 				<param name="ios-package" value="BeaconPlugin" />
 			</feature>
 		</config-file>
-
+		<config-file target="*-Info.plist" parent="NSBluetoothAlwaysUsageDescription">
+            <string>해당 앱의 기능을 완전히 활성화 하려면 bluetooth 기능이 필요합니다. (자세한 내용은 관리자에게 문의하세요)</string>
+        </config-file>
+		<config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
+            <string>해당 앱의 기능을 완전히 활성화 하려면 bluetooth 주변 기기 감지 권한이 필요합니다.</string>
+        </config-file>
 		<framework src="src/ios/VestigoAD_IOS_core.framework" custom="true" />
 
 		<header-file src="src/ios/Bridging-Header.h"/>

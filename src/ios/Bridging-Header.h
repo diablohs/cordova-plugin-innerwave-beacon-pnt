@@ -3,3 +3,4 @@
 //
 
 #import <Cordova/CDV.h>
+#import "VestigoAD_IOS_core/PnTADFramework.h"
