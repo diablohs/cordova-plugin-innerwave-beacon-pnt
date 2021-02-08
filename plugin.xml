@@ -50,11 +50,13 @@
 	</platform>
 
 	<platform name="ios">
+		<dependency id="cordova-plugin-add-swift-support" version="^2.0.2"/>
 		<config-file parent="/*" target="config.xml">
 			<feature name="BeaconPlugin">
 				<param name="ios-package" value="BeaconPlugin" />
 			</feature>
 		</config-file>
-		<source-file src="src/ios/BeaconPlugin.m" />
+		<header-file src="src/ios/Bridging-Header.h"/>
+        <source-file src="src/ios/BeaconPlugin.swift"/>
 	</platform>
 </plugin>

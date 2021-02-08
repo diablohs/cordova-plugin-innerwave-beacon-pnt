@@ -89,11 +89,18 @@ public class BeaconPlugin extends CordovaPlugin {
         return false;
     }
 
+    /**
+     * bluetooth enable 상태를 확인. enable 이 아니면 enable.
+     * @return
+     */
     private final boolean checkBluetooth() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return !bluetoothAdapter.isEnabled() ? bluetoothAdapter.enable() : true;
     }
 
+     /**
+     * 위치 서비스 : 항상 허용 을 체크 및 받을 때 까지 재귀 호출.
+     */
     private final void checkPermissions() {
         Context context=cordova.getActivity().getApplicationContext();
         BeaconPlugin self = this;
