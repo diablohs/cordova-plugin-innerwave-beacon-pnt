@@ -39,7 +39,12 @@ import androidx.core.content.ContextCompat;
 import com.pnt.sdk.vestigo.PnTVestigoManager;
 import com.pnt.sdk.vestigo.classes.APIAuthentication;
 import com.pnt.sdk.vestigo.classes.UserIdentity;
+import com.pnt.sdk.vestigo.classes.VestigoResult;
+import com.pnt.sdk.vestigo.classes.geofence.VestigoSettings;
 import com.pnt.sdk.vestigo.common.CommonConst;
+import com.pnt.sdk.vestigo.common.Enum.TYPE;
+
+import java.io.Serializable;
 
 import kotlin.Metadata;
 import kotlin.Unit;
@@ -229,9 +234,13 @@ public class BeaconPlugin extends CordovaPlugin {
                Intrinsics.checkNotNullParameter(context, "context");
                Intrinsics.checkNotNullParameter(intent, "intent");
                if (Intrinsics.areEqual(intent.getAction(), CommonConst.ACTION_VESTIGO_SDK_RESULT)) {
-                  boolean success = intent.getBooleanExtra(CommonConst.EXTRA_KEY_SUCCESS, false);
-                  String key = intent.getStringExtra(CommonConst.EXTRA_KEY_STATE);
-                  String message = intent.getStringExtra(CommonConst.EXTRA_KEY_MESSAGE);
+                //   boolean success = intent.getBooleanExtra(CommonConst.EXTRA_KEY_SUCCESS, false);
+                //   String key = intent.getStringExtra(CommonConst.EXTRA_KEY_STATE);
+                //   String message = intent.getStringExtra(CommonConst.EXTRA_KEY_MESSAGE);
+                Serializable serializable = intent.getSerializableExtra("VestigoResult");
+                VestigoResult vestigoResult = (VestigoResult)serializable;
+                String key = vestigoResult.state;
+                
                   if (key != null) {
                      switch(key) {
                         case CommonConst.STATE_GOT_TOKEN:
@@ -243,8 +252,8 @@ public class BeaconPlugin extends CordovaPlugin {
                             }
                             break;
                         case CommonConst.STATE_MONITORING:
-                            if (key.equals("STATE_MONITORING") && success) {
-                                Log.i("BEACONPlugin","[ACTION_VESTIGO_SDK_RESULT: success] state : STATE_MONITORING, message: " + message);
+                            if (vestigoResult.resultType == TYPE.START && vestigoResult.success) {
+                                Log.i("BEACONPlugin","[ACTION_VESTIGO_SDK_RESULT: success] state : STATE_MONITORING, message: " + vestigoResult.message);
                             }
                             break;
                         case CommonConst.STATE_ERROR:
@@ -253,8 +262,8 @@ public class BeaconPlugin extends CordovaPlugin {
                      }
                   }
    
-                  if (!success) {
-                    Log.i("BEACONPlugin","[ACTION_VESTIGO_SDK_RESULT: fail] state : " + key + ", message: " + message);
+                  if (!vestigoResult.success) {
+                    Log.i("BEACONPlugin","[ACTION_VESTIGO_SDK_RESULT: fail] state : " + key + ", message: " + vestigoResult.message);
                   }
                }   
             }
