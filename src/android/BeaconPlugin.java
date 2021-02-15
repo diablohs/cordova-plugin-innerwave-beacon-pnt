@@ -137,7 +137,7 @@ public class BeaconPlugin extends CordovaPlugin {
                     if (ContextCompat.checkSelfPermission(context,Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         // granted all
                     } else {
-                        String alertMsg = "서비스를 이용하기 위해서는 위치권한 '항상허용' 이 필요합니다. 앱 상세설정으로 이동합니다. (권한 - 위치 - 항상 허용 선택)";
+                        String alertMsg = "스마트병원 출입통제 및 관리를 위해 위치권한 '항상허용'으로 상태 변경이 필요합니다. (권한 > 위치 > 항상 허용 선택)";
                         if(locationFlag){
                             AlertDialog.Builder builder = new AlertDialog.Builder(this.cordova.getActivity());
 
@@ -171,7 +171,8 @@ public class BeaconPlugin extends CordovaPlugin {
 
            if (!powerManager.isIgnoringBatteryOptimizations(cordova.getActivity().getPackageName())){
                 startFlag = false;
-                String alertMsg = "서비스를 이용하기 위해서는 배터리 최적화 앱 제외가 필요합니다. 배터리 최적화 설정으로 이동합니다. (전체 - 앱 검색 - 해당 앱 off)";   
+                String alertMsg = "스마트병원 출입통제 및 관리를 위해 배터리 최적화 앱 제외가 필요합니다. (전체 > 앱 검색 > 해당 앱 off)";
+ 
                 if(batteryFlag){
                     AlertDialog.Builder builder = new AlertDialog.Builder(this.cordova.getActivity());
                     builder.setTitle("알림").setMessage(alertMsg).setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener(){
@@ -316,6 +317,7 @@ public class BeaconPlugin extends CordovaPlugin {
             PnTVestigoManager pnTVestigoManager = PnTVestigoManager.getInstance();
             APIAuthentication apiAuthentication = new APIAuthentication(oAuthDomain, apiDomain, clientId, clientSecret, scope);
             pnTVestigoManager.setParameterInfo(apiAuthentication, new UserIdentity(targetId, targetId));
+            PnTVestigoManager.getInstance().addSettings(new VestigoSettings(true, true, 1000f));
             pnTVestigoManager.getInstance().startPnTVestigoService(context);   
             
             callbackContext.success(json.toString());
