@@ -123,6 +123,13 @@ import UIKit
         userIdentity.targetId =  targetId// 소문자만, 20자이하
         userIdentity.targetName =  targetName
 
+        let settings: VestigoSettings = VestigoSettings()
+        settings.autoStartWhenEnter = true
+        settings.autoStopWhenExit = true
+        settings.boundaryRadius = 100.0
+
+        pnTADManager?.sharedInstance()?.addSettings(settings)
+
         // 필수파라미터들을 셋.
         pnTADManager?.setParameterInfoWith(authenticationInfo, userIdentity: userIdentity);
         pnTADManager?.startVestigoService()
@@ -150,7 +157,7 @@ import UIKit
         // check location auth
         print("isLocationAuthAlways : " + String(isLocationAuthAlways()));
         if(!self.isLocationAuthAlways()) {
-            showSimpleAlert(msg: "서비스를 위해선 '위치서비스'의 '항상 허용' 권한이 필요합니다."/*위치서비스 권한을 확인합니다. ((위치서비스 기능 권한관련 시스템 팝업이 나타나면 '앱을 사용하는 동안' 을 먼저 선택하세요. 이후 두번째 팝업에서는 '항상 허용'을 선택해주세요.)"*/) { action in
+            showSimpleAlert(msg: "스마트병원 출입통제 및 관리를 위해 위치권한 '항상허용'으로 상태 변경이 필요합니다."/*위치서비스 권한을 확인합니다. ((위치서비스 기능 권한관련 시스템 팝업이 나타나면 '앱을 사용하는 동안' 을 먼저 선택하세요. 이후 두번째 팝업에서는 '항상 허용'을 선택해주세요.)"*/) { action in
                 self.checkLocationAuthorizationAlways()
             }
         }else {
