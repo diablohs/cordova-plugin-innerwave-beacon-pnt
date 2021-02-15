@@ -128,7 +128,7 @@ import UIKit
         settings.autoStopWhenExit = true
         settings.boundaryRadius = 100.0
 
-        pnTADManager?.sharedInstance()?.addSettings(settings)
+        pnTADManager?.addSettings(settings)
 
         // 필수파라미터들을 셋.
         pnTADManager?.setParameterInfoWith(authenticationInfo, userIdentity: userIdentity);
