@@ -205,7 +205,8 @@ public class BeaconPlugin extends CordovaPlugin {
            if (grantResults[0] != 0) {
             //   String toastMsg = "Service couldn\'t run without permission of location service!";
             //   Toast.makeText(context, toastMsg, 0).show();
-              this.checkPermissions();
+            // 거부 시 그냥 기능 종료 하도록 함.
+            //   this.checkPermissions();
            } else {
               this.checkPermissions();
            }
