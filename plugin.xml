@@ -22,6 +22,7 @@
 				android:enabled="true"
 				android:foregroundServiceType="connectedDevice|dataSync">
 			</service>
+			<receiver android:name="com.pnt.sdk.vestigo.classes.geofence.GeoFenceBroadcastReceiver" />
         </config-file>
 
 		 <!-- Android Manifest Config -->
