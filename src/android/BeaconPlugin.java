@@ -110,7 +110,7 @@ public class BeaconPlugin extends CordovaPlugin {
         Context context=cordova.getActivity().getApplicationContext();
         BeaconPlugin self = this;
 
-        if (VERSION.SDK_INT >= 23 && VERSION.SDK_INT < 29) {
+        if (VERSION.SDK_INT >= 26 && VERSION.SDK_INT < 29) {
            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
               startFlag = true;
               this.ignoreBatteryOptimizations();
@@ -166,7 +166,7 @@ public class BeaconPlugin extends CordovaPlugin {
         Context context=cordova.getActivity().getApplicationContext();
         BeaconPlugin self = this;
 
-        if (VERSION.SDK_INT >= 23) {
+        if (VERSION.SDK_INT >= 26) {
            PowerManager powerManager = (PowerManager) cordova.getActivity().getSystemService(Context.POWER_SERVICE);
 
            if (!powerManager.isIgnoringBatteryOptimizations(cordova.getActivity().getPackageName())){
