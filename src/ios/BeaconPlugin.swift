@@ -60,10 +60,10 @@ import UIKit
         bluetoothFlag = true;
         
         oAuthDomain = "https://dev-oauth.indoorplus.io"; // oAuth 인증서버
-        apiDomain = "http://13.125.33.143:8401"; // api 서버
-        client_id = "nhimc";
-        client_secret = "c3420b3bf4bf0c498ae689e81f600ab3";
-        scope = "706E7430-F5F8-466E-AFF9-25556B57FE11";
+        apiDomain = "http://3.35.182.33:8401"; // api 서버
+        client_id = "cmcep";
+        client_secret = "4c0d875631284405c82523523885effe";
+        scope = "706E7430-F5F8-466E-AFF9-25556B571111";
         
         pnTADManager = PnTVestigoManager.sharedInstance();
         
