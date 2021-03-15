@@ -89,6 +89,10 @@ import UIKit
             print(mmrId);
             targetId = String(mmrId);
             targetName = String(mmrId);
+          }else if let mmrId = json["mmrId"] as? String {
+            print(mmrId);
+            targetId = mmrId;
+            targetName = mmrId;
           }else{
             resultMsg = "mmrId는 필수값입니다.";
           }
