@@ -14,7 +14,7 @@
 @protocol PnTVestigoDelegate <NSObject>
 
 /**
- * Vestigo ios SDK 를 사용하기 전에 필수 파라미터 들을 set 합니다.
+ * Vestigo ios SDK 에서 구동 결과에 대해 피드백이 전달됩니다.
  * @param result : VestigoResult.
  */
 @optional
