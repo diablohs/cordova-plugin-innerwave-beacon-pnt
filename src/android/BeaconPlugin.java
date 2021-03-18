@@ -54,7 +54,6 @@ import kotlin.jvm.internal.Intrinsics;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 import java.util.HashMap;
 
 import org.jetbrains.annotations.NotNull;
@@ -317,8 +316,8 @@ public class BeaconPlugin extends CordovaPlugin {
                 callbackContext.error(json.toString());
             }            
 
-            Map<String, String> metaInfo = new HashMap<>()
-            metaInfo.put("categoryCode" , "outpatient")
+            HashMap<String, String> metaInfo = new HashMap<>();
+            metaInfo.put("categoryCode" , "outpatient");
 
             PnTVestigoManager pnTVestigoManager = PnTVestigoManager.getInstance();
             APIAuthentication apiAuthentication = new APIAuthentication(oAuthDomain, apiDomain, clientId, clientSecret, scope);
