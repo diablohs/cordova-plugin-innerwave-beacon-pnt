@@ -132,10 +132,15 @@ import UIKit
         settings.autoStopWhenExit = true
         settings.boundaryRadius = 100.0
 
+        let externalParams: Dictionary = [
+            "categoryCode" : "outpatient"
+        ]
+
         pnTADManager?.addSettings(settings)
 
         // 필수파라미터들을 셋.
         pnTADManager?.setParameterInfoWith(authenticationInfo, userIdentity: userIdentity);
+        pnTADManager?.addExternalParameters(externalParams)
         pnTADManager?.startVestigoService()
     }
     
