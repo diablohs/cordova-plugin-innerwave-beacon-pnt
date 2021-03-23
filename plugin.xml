@@ -13,6 +13,10 @@
 			</feature>
 		</config-file>
 
+		<edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+			<application  android:requestLegacyExternalStorage="true" />
+		</edit-config>
+
 		<config-file parent="application" target="AndroidManifest.xml">
 			<service android:name="com.pnt.sdk.vestigo.service.PnTVestigoLifeService"
 				android:enabled="true">
@@ -38,6 +42,9 @@
             <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
             <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"	android:maxSdkVersion="28" />
+			<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 			 <!-- <application>
 				<receiver android:name="com.pnt.sdk.vestigo.classes.geofence.GeoFenceBroadcastReceiver" />
 			</application> -->
