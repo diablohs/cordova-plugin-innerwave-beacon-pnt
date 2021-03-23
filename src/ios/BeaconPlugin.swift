@@ -24,7 +24,7 @@ import UIKit
     var resultMsg: String!;
     var locationFlag:Bool!;
     var bluetoothFlag:Bool!;
-    
+
     func callbackResult(){
         var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Not available")
         var resultDict: [String:String] = ["result":"success"]

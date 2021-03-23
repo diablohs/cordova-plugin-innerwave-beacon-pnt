@@ -86,10 +86,12 @@ public class BeaconPlugin extends CordovaPlugin {
     private boolean locationFlag = true;
     private boolean batteryFlag = true;
     private boolean startFlag = false;
+    private boolean agreeFlag = false;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("initBeacon")) {
+            agreeFlag = true;
             this.initBeacon(callbackContext);
             return true;
         }else if (action.equals("startBeacon")) {
@@ -232,7 +234,7 @@ public class BeaconPlugin extends CordovaPlugin {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
          super.onActivityResult(requestCode, resultCode, data);
 
-         if (requestCode == this.REQUEST_APP_SETTINGS) {
+         if (requestCode == this.REQUEST_APP_SETTINGS && agreeFlag) {
             this.checkPermissions();
          } else if (requestCode == this.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS) {
             this.ignoreBatteryOptimizations();
