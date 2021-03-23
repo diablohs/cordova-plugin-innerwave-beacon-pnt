@@ -59,11 +59,17 @@ import UIKit
         locationFlag = true;
         bluetoothFlag = true;
         
-        oAuthDomain = "https://dev-oauth.indoorplus.io"; // oAuth 인증서버
-        apiDomain = "http://3.35.182.33:8401"; // api 서버
-        client_id = "cmcep";
-        client_secret = "4c0d875631284405c82523523885effe";
-        scope = "706E7430-F5F8-466E-AFF9-25556B571111";
+        // oAuthDomain = "https://dev-oauth.indoorplus.io"; // oAuth 인증서버
+        // apiDomain = "http://3.35.182.33:8401"; // api 서버
+        // client_id = "cmcep";
+        // client_secret = "4c0d875631284405c82523523885effe";
+        // scope = "706E7430-F5F8-466E-AFF9-25556B571111";
+
+        oAuthDomain = "https://seoulauth.cmcnu.or.kr"; // oAuth 인증서버
+        apiDomain = "https://seoulapi.cmcnu.or.kr"; // api 서버
+        client_id = "cmcseoul";
+        client_secret = "a92eddf22a8a890767d3e1d36e633b98";
+        scope = "6C57AFE5-764D-44CB-BDE5-43DFA5549E50";
         
         pnTADManager = PnTVestigoManager.sharedInstance();
         
