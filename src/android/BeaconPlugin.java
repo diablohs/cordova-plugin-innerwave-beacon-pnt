@@ -43,6 +43,7 @@ import com.pnt.sdk.vestigo.classes.VestigoResult;
 import com.pnt.sdk.vestigo.classes.geofence.VestigoSettings;
 import com.pnt.sdk.vestigo.common.CommonConst;
 import com.pnt.sdk.vestigo.common.Enum.TYPE;
+import com.pnt.sdk.vestigo.common.PnTDebug;
 
 import java.io.Serializable;
 
@@ -275,6 +276,7 @@ public class BeaconPlugin extends CordovaPlugin {
 
     private void initBeacon(CallbackContext callbackContext) {
         JSONObject json = new JSONObject();
+        PnTDebug.FILE_LOG = true; 
 
         checkBluetooth();
         checkPermissions();
