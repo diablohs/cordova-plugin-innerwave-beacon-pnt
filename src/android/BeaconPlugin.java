@@ -70,11 +70,18 @@ public class BeaconPlugin extends CordovaPlugin {
     private final int REQUEST_IGNORE_BATTERY_OPTIMIZATIONS = 2222;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("[HH:mm:ss]", Locale.KOREAN);
     // 아래 정보들은 Vestigo SDK 를 사용하기 위해 PnT 로 부터 발급 받는 인증관련 정보입니다. 추후 실서버 가 준비되면 변경되어질 것입니다.
-    private final String oAuthDomain = "https://dev-oauth.indoorplus.io";
-    private String apiDomain = "http://3.35.182.33:8401";
-    private final String clientId = "cmcep";
-    private final String clientSecret = "4c0d875631284405c82523523885effe";
-    private final String scope = "706E7430-F5F8-466E-AFF9-25556B571111";
+    // private final String oAuthDomain = "https://dev-oauth.indoorplus.io";
+    // private String apiDomain = "http://3.35.182.33:8401";
+    // private final String clientId = "cmcep";
+    // private final String clientSecret = "4c0d875631284405c82523523885effe";
+    // private final String scope = "706E7430-F5F8-466E-AFF9-25556B571111";
+
+    private final String oAuthDomain = "https://seoulauth.cmcnu.or.kr";
+    private String apiDomain = "https://seoulapi.cmcnu.or.kr";
+    private final String clientId = "cmcseoul";
+    private final String clientSecret = "a92eddf22a8a890767d3e1d36e633b98";
+    private final String scope = "6C57AFE5-764D-44CB-BDE5-43DFA5549E50";
+
     private final BroadcastReceiver mVestigoResultReceiver;
     private boolean locationFlag = true;
     private boolean batteryFlag = true;
