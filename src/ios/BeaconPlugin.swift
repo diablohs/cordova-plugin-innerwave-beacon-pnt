@@ -136,7 +136,7 @@ import UIKit
             "categoryCode" : "outpatient"
         ]
 
-        pnTADManager?.addSettings(settings)
+        // pnTADManager?.addSettings(settings)
 
         // 필수파라미터들을 셋.
         pnTADManager?.setParameterInfoWith(authenticationInfo, userIdentity: userIdentity);
