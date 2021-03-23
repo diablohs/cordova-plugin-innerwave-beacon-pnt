@@ -13,10 +13,6 @@
 			</feature>
 		</config-file>
 
-		<edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
-			<application  android:requestLegacyExternalStorage="true" />
-		</edit-config>
-
 		<config-file parent="application" target="AndroidManifest.xml">
 			<service android:name="com.pnt.sdk.vestigo.service.PnTVestigoLifeService"
 				android:enabled="true">
