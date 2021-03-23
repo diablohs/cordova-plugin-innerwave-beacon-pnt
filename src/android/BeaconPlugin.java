@@ -326,7 +326,7 @@ public class BeaconPlugin extends CordovaPlugin {
             APIAuthentication apiAuthentication = new APIAuthentication(oAuthDomain, apiDomain, clientId, clientSecret, scope);
             pnTVestigoManager.setParameterInfo(apiAuthentication, new UserIdentity(targetId, targetId));
             pnTVestigoManager.addExternalParameters(metaInfo);
-            pnTVestigoManager.addSettings(new VestigoSettings(true, true, 100f));
+            //pnTVestigoManager.addSettings(new VestigoSettings(true, true, 100f));
             pnTVestigoManager.startPnTVestigoService(context);   
             
             callbackContext.success(json.toString());
