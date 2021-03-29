@@ -285,8 +285,8 @@ public class BeaconPlugin extends CordovaPlugin {
 
     private void initBeacon(CallbackContext callbackContext) {
         JSONObject json = new JSONObject();
-        PnTDebug.FILE_LOG = true; 
-        PnTDebug.LOG_ALL = true;
+        // PnTDebug.FILE_LOG = true; 
+        // PnTDebug.LOG_ALL = true;
         
         checkBluetooth();
         checkPermissions();
