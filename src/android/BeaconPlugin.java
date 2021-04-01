@@ -217,7 +217,7 @@ public class BeaconPlugin extends CordovaPlugin {
                         json.put("result", "fail");
                         json.put("message", e.toString());
                     }catch (JSONException ex) {}
-                    callbackContext.error(json.toString());
+                    staticCallbackContext.error(json.toString());
                 }
             }
         }
