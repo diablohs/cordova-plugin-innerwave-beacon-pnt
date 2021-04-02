@@ -10,6 +10,7 @@
 #import "PnTLogger.h"
 #import "APIAuthentication.h"
 #import "UserDefaults.h"
+#import "Util.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) getAdBeaconSpecWith: (NSString *)scopeUUID targetId: (NSString *)targetId targetName: (NSString *)targetName externalDic: (NSDictionary *)externalDic;
 - (void) getCompanyInfoWith: (NSString *)scopeUUID;
 - (void) uploadPositionInfoWith: (NSString *)myBeaconSpecId hostBeaconSpecId: (NSString *)hostBeaconSpecId;
+- (void) requestTagUnMapping: (NSString *) targetId;
+
 - (void) HTTPGetJSON: (NSString *)url reqId: (NSInteger)reqId;
 - (void) HTTPPostJSONWithURL: (NSString *)url jsonObj:(NSObject *)jsonObj reqId: (NSInteger)reqId;
 
