@@ -37,11 +37,6 @@
             <!-- targetSDKVersion: 29 이상일 때 추가 필수 -->
             <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
             <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-			 <!-- <application>
-				<receiver android:name="com.pnt.sdk.vestigo.classes.geofence.GeoFenceBroadcastReceiver" />
-			</application> -->
         </config-file>
 
         <framework src="src/android/beacon.gradle" custom="true" type="gradleReference" />
