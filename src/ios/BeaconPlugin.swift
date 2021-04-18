@@ -24,6 +24,7 @@ import UIKit
     var resultMsg: String!;
     var locationFlag:Bool!;
     var bluetoothFlag:Bool!;
+    var agreeFlag:Bool = false;
 
     func callbackResult(){
         var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Not available")
@@ -58,6 +59,7 @@ import UIKit
         
         locationFlag = true;
         bluetoothFlag = true;
+        agreeFlag = true;
         
         // oAuthDomain = "https://dev-oauth.indoorplus.io"; // oAuth 인증서버
         // apiDomain = "http://3.35.182.33:8401"; // api 서버
@@ -214,10 +216,12 @@ extension BeaconPlugin {
      PnT Vestigo Service 는 location manager 권한이 always 로 유지되어야 합니다. 이에 App  단에서 필히 처음 시작 시 권한을 확보할 수 있도록 하기 위해 아래 예제를 구현해두었습니다.
      */
     private func checkLocationAuthorizationAlways() {
-        print("checkLocationAuthorizationAlways")
-        locationManager = CLLocationManager()
-        self.locationManager.delegate = self
-        requestLocationAuthorization()
+        if(agreeFlag){
+            print("checkLocationAuthorizationAlways")
+            locationManager = CLLocationManager()
+            self.locationManager.delegate = self
+            requestLocationAuthorization()
+        }
     }
     
     //* 위치동의 권한 필수***(항상허용 권한 필요)
