@@ -255,7 +255,7 @@ extension BeaconPlugin {
                 // self.callbackResult()
                 break;
             case .authorizedAlways:
-                callbackResult()
+                // callbackResult()
                 break;
             @unknown default:
                 DispatchQueue.main.async{
@@ -345,7 +345,7 @@ extension BeaconPlugin: CLLocationManagerDelegate {
         if(status == .notDetermined || status == .authorizedWhenInUse) { //인증요청
             self.requestLocationAuthorization()
         }else if(status == .authorizedAlways) {//항상허용에 동의한 경우
-//            callbackResult()
+            callbackResult()
         }else { //그 외
             self.locationFlag = false
             self.resultMsg = "사용자가 위치서비스 항상허용을 선택하지 않음."
