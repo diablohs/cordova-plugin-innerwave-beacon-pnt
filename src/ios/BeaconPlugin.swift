@@ -252,7 +252,7 @@ extension BeaconPlugin {
                     self.locationManager.requestAlwaysAuthorization()
                 }
                 
-                self.callbackResult()
+                // self.callbackResult()
                 break;
             case .authorizedAlways:
                 callbackResult()
