@@ -7,18 +7,18 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "BeaconSignal.h"
+#import "PnTBeaconSignal.h"
 #import "PnTLogger.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SignalManager : NSObject
+@interface PnTSignalManager : NSObject
 
 @property (strong, nonatomic) NSMutableDictionary *averageDicById;
 
 
 - (void) addCLBeaconSignal: (CLBeacon *)beacon;
-- (BeaconSignal *) getStrongestBeacon;
+- (PnTBeaconSignal *) getStrongestBeacon;
 - (BOOL) isEmpty;
 - (void) clearAll;
 

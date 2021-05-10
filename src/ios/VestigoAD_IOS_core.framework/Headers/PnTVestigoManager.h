@@ -10,17 +10,17 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "PnTDelegate.h"
 #import "PnTLogger.h"
-#import "APIManager.h"
+#import "PnTAPIManager.h"
 #import "APIAuthentication.h"
 #import "UserIdentity.h"
 #import "VestigoSettings.h"
-#import "UserDefaults.h"
-#import "Util.h"
-#import "SignalManager.h"
+#import "PnTUserDefaults.h"
+#import "PnTUtil.h"
+#import "PnTSignalManager.h"
 
 @class PnTVestigoManager;
 
-@interface PnTVestigoManager : NSObject <APIManagerDelegate>
+@interface PnTVestigoManager : NSObject <PnTAPIManagerDelegate>
 
 + (instancetype)sharedInstance;
 /**

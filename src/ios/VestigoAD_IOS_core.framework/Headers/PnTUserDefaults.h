@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UserDefaults : NSObject
+@interface PnTUserDefaults : NSObject
 + (NSString *)PREF_KEY_API_DOMAIN;
 + (NSString *)UD_KEY_API_TOKEN;
 + (NSString *)UD_KEY_SCOPE_UUID;

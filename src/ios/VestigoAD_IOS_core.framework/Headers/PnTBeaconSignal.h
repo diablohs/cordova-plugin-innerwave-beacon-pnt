@@ -9,7 +9,7 @@
 #import "PnTLogger.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BeaconSignal : NSObject
+@interface PnTBeaconSignal : NSObject
 
 @property NSString *uuid;
 @property NSInteger major;

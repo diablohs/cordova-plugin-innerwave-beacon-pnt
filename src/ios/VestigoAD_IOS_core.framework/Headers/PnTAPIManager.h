@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "PnTLogger.h"
 #import "APIAuthentication.h"
-#import "UserDefaults.h"
-#import "Util.h"
+#import "PnTUserDefaults.h"
+#import "PnTUtil.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol APIManagerDelegate <NSObject>
+@protocol PnTAPIManagerDelegate <NSObject>
 @optional
 - (void) onGetAPITokenResultWith: (BOOL) success newApiToken: (NSString *)token newScope: (NSString *)scope;
 @optional
@@ -27,21 +27,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-@interface APIManager : NSObject
+@interface PnTAPIManager : NSObject
 
-+ (APIManager *)sharedInstance;
++ (PnTAPIManager *)sharedInstance;
 
 /**
  처음 APImanager 인스턴스 생성시 생성자 with
   @oAuthDomain: oAuth 서버 주소
   @apiDomain : api 서버 주소
  */
-+ (APIManager *)initInstanceWith: (NSString *)oAuthDomain apiDomain: (NSString *)apiDomain;
++ (PnTAPIManager *)initInstanceWith: (NSString *)oAuthDomain apiDomain: (NSString *)apiDomain;
 
 @property BOOL readyForAPIs;
 @property NSString *oAuthDomain;
 @property NSString *apiDomain;
-@property id<APIManagerDelegate> delegate;
+@property id<PnTAPIManagerDelegate> delegate;
 
 - (void) getAPITokenWith: (NSString *)client_id client_secret: (NSString *)client_secret scope:(NSString *) uuidForScope;
 - (void) getAdBeaconSpecWith: (NSString *)scopeUUID targetId: (NSString *)targetId targetName: (NSString *)targetName;

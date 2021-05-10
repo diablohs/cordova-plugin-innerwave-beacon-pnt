@@ -18,6 +18,11 @@
 +(BOOL)DEBUG_MONITORING;
 +(void)setDEBUG_MONITORING:(BOOL)isEnable;
 
++(BOOL)DEBUG_ENABLE_FILE_LOG;
++(void)setDEBUG_ENABLE_FILE_LOG:(BOOL)isEnable;
+
+
+
 +(NSInteger)DEBUG_CODE;
 +(NSInteger)INFO_CODE;
 +(NSInteger)WARN_CODE;
@@ -25,6 +30,8 @@
 +(NSInteger)FATAL_CODE;
 
 +(void)log:(NSInteger)code msg:(NSString *)msg;
+
++ (void)logToFile:(NSString *)string;
 
 @end
 
